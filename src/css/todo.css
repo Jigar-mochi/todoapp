@@ -1,0 +1,20 @@
+.todo1 {
+  height: 80vh;
+  background-color: rgb(239, 239, 239);
+  border-radius: 1.5rem;
+  box-shadow: 1px 1px 5px 7px rgb(142, 141, 141);
+}
+.list {
+  background-color: rgb(234, 234, 234);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.del {
+  font-size: 20px;
+  cursor: pointer;
+}
+.notes {
+  background-color: rgb(178, 131, 221);
+  border-radius: 0.5rem;
+}
