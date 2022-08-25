@@ -74,7 +74,6 @@ const Todo = () => {
             arr.map((elem, id) => {
                 if (index === id) {
                     return elem.toUpperCase()
-                    // return elem.toUpperCase()
                 }
                 return elem
             })
@@ -110,9 +109,7 @@ const Todo = () => {
                     <input className="form-control me-2 input1" onChange={(e) => setText(e.target.value)} value={text} type="search" placeholder="Search" aria-label="Search" />
                     {editi ?
                         <AiOutlinePlusCircle type='button' className='text1' /> :
-                        // <AiOutlinePlusCircle type='button' className='text1' onClick={click} /> :
                         <MdModeEdit className='text1' />
-                        // <MdModeEdit className='text1' onClick={click} />
                     }
                 </form>
                 <div className="container conta5 h-50 mt-3">
