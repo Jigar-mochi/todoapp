@@ -1,10 +1,11 @@
 import './App.css';
-import Todo from './components/Todo';
+import Model from './components/Model';
+// import Todo from './components/Todo';
 
 function App() {
   return (
     <>
-      <Todo />
+      <Model />
     </>
   );
 }

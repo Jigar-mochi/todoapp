@@ -1,80 +1,141 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import '../css/todo.css'
-import { AiFillDelete } from "react-icons/ai";
-// import Conta from '../context/context';
-// import { useContext } from 'react';
-// import axios from 'react'
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useState, useEffect } from 'react';
+import { MdDelete, MdModeEdit } from "react-icons/md";
+import { TbLetterCaseUpper, TbLetterCaseLower, TbLetterCaseToggle } from "react-icons/tb";
+
+
+const getData = () => {
+    let data = localStorage.getItem('lists')
+    if (data) {
+        return JSON.parse(localStorage.getItem('lists'))
+    }
+    else {
+        return []
+    }
+}
 
 const Todo = () => {
-    // const data1 = useContext(Conta)
-    // console.log(data1)
-    const getNote = async () => {
-        const url = 'https://todo-4719b-default-rtdb.firebaseio.com/addNote.json'
-        const notes = await fetch(url)
-        const parsData = notes.json()
-        console.log(parsData)
-    }
-    useEffect(() => {
-        getNote()
-    }, [])
 
     const [text, setText] = useState('')
-    const [note, setNote] = useState([])
-    const add = () => {
-        setNote(note.concat(text))
-    }
+    const [arr, setArr] = useState(getData())
+    const [editi, setEditi] = useState(true)
+    const [id, setId] = useState('')
 
-    const handleclick = (e) => {
-        e.preventDefault();
+    const click = (e) => {
+        e.preventDefault()
         if (!text) {
-
-        } else
-            add()
-
-        setText('')
-    }
-    const change = (e) => {
-        setText(e.target.value)
-    }
-
-    const delt = (del) => {
-        setNote(note.filter((item, index) => index !== del))
-
-    }
-    const clear = () => {
-        setNote([])
-    }
+            alert('please fill some data')
+        } else if (text && !editi) {
+            setArr(
+                arr.map((elem, index) => {
+                    if (index === id) {
+                        return text
+                    }
+                    return elem
+                }))
+            setText('')
+            setId(null)
+            setEditi(true)
 
 
-    function check(event, index, stringValue) {
-        if (event.target.checked === true) {
-            document.getElementsByName(stringValue)[0].style.textDecorationLine = 'line-through'
         }
         else {
-            document.getElementsByName(stringValue)[0].style.textDecoration = 'none'
+            setArr([...arr, text])
+            setText('')
         }
+    }
+    const del = (index) => {
+        setArr(arr.filter((e, inde) => inde !== index))
+    }
 
+    useEffect(() => {
+        localStorage.setItem('lists', JSON.stringify(arr))
+    }, [arr])
+
+    const edit = (index) => {
+        let item = JSON.parse(localStorage.getItem('lists'))[index]
+        setText(item)
+        setEditi(false)
+        setId(index)
+    }
+
+    const change = (eve, index, string) => {
+        if (eve.target.checked === true) {
+            document.getElementsByName(string)[0].style.textDecorationLine = 'line-through'
+        }
+        else {
+            document.getElementsByName(string)[0].style.textDecoration = 'none'
+        }
+    }
+    const upper = (index) => {
+        setArr(
+            arr.map((elem, id) => {
+                if (index === id) {
+                    return elem.toUpperCase()
+                    // return elem.toUpperCase()
+                }
+                return elem
+            })
+        )
+    }
+    const lower = (index) => {
+
+        setArr(
+            arr.map((elem, id) => {
+                if (index === id) {
+                    return elem.toLowerCase()
+                }
+                return elem
+            })
+        )
+    }
+    const sentCase = (index) => {
+        setArr(
+            arr.map((elem, id) => {
+                if (index === id) {
+                    return elem.split(" ").map((e) => e[0].toUpperCase() + e.slice(1)).join(' ')
+                }
+                return elem
+            })
+        )
     }
 
     return (
-        <div>
-            <div className="container todo1 p-3 my-5 col-md-3">
-                <form className="d-flex" onSubmit={handleclick}>
-                    <input className="form-control me-2"
-                        onChange={change} type="text" value={text} placeholder="enter some text here" aria-label="text" />
-                    <button className="btn btn-outline-dark" type="submit">addnote</button>
+        <div className='conta'>
+            <div className="container conta2 h-50 col-md-5">
+                <h1 className='text-center text2 p-2'>todo app</h1>
+                <form className='container conta3' onSubmit={click}>
+                    <input className="form-control me-2 input1" onChange={(e) => setText(e.target.value)} value={text} type="search" placeholder="Search" aria-label="Search" />
+                    {editi ?
+                        <AiOutlinePlusCircle type='button' className='text1' /> :
+                        // <AiOutlinePlusCircle type='button' className='text1' onClick={click} /> :
+                        <MdModeEdit className='text1' />
+                        // <MdModeEdit className='text1' onClick={click} />
+                    }
                 </form>
-                {note.length !== 0 ?
-                    note.map((e, index) => {
-                        return <div key={index} className="container notes my-3 p-2 list" >
-                            <input type="checkbox" onChange={b => check(b, index, e)} value={e} id='check' className='del' />
-                            <h5 id='letter' name={e}>{e}</h5>
-                            <AiFillDelete className='del' type='submit' onClick={() => delt(index)} />
-                        </div>
-                    }) : <div className='container notes my-3 p-3 list'>add some notes here</div>
-                }
-                <button className="btn btn-outline-dark" type="submit" onClick={clear}>clear all notes</button>
+                <div className="container conta5 h-50 mt-3">
+                    {
+                        arr.map((e, index) => {
+                            return <div key={index} className="container conta4 mt-2">
+                                <div className="icon">
+                                    <input className="form-check-input mt-0 input2" type="checkbox" onChange={b => change(b, index, e)} value='' id="flexCheckDefault" />
+                                    <TbLetterCaseUpper className='ms-2 but' onClick={() => upper(index)} />
+                                    <TbLetterCaseLower className='ms-2 but' onClick={() => lower(index)} />
+                                    <TbLetterCaseToggle className='ms-2 but' onClick={() => sentCase(index)} />
+                                </div>
+
+                                <h5 className='ps-2' name={e}>{e}</h5>
+                                <div className='icon'>
+                                    <MdModeEdit onClick={() => edit(index)} />
+                                    <MdDelete onClick={() => del(index)} />
+                                </div>
+
+                            </div>
+                        })
+                    }
+                </div>
             </div>
         </div>
     )

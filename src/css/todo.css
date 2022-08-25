@@ -1,20 +1,77 @@
-.todo1 {
-  height: 80vh;
-  background-color: rgb(239, 239, 239);
-  border-radius: 1.5rem;
-  box-shadow: 1px 1px 5px 7px rgb(142, 141, 141);
+/* containers */
+
+.conta {
+  background-color: rgb(19, 19, 64);
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.list {
-  background-color: rgb(234, 234, 234);
+.conta2 {
+  background-color: blueviolet;
+  border-radius: 1rem;
+}
+.conta3 {
+  background-color: white;
+  display: flex;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.conta4 {
+  background-color: blanchedalmond;
+  color: black;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.del {
-  font-size: 20px;
+.conta5 {
+  overflow-y: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.conta5::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.conta5 {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* input values  */
+
+.input1 {
+  border: none;
+}
+.input2 {
   cursor: pointer;
 }
-.notes {
-  background-color: rgb(178, 131, 221);
-  border-radius: 0.5rem;
+
+/* text  */
+
+.text1 {
+  color: black;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+.text2 {
+  text-shadow: 1px 1px 2px rgb(36, 35, 35), 0 0 25px rgb(202, 199, 199),
+    0 0 5px yellow;
+}
+
+.icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+}
+.but {
+  border: 1px solid rgb(20, 18, 18);
+  border-radius: 50%;
 }
