@@ -1,0 +1,60 @@
+.app {
+  background-color: rgb(19, 19, 64);
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .todo-container {
+    background-color: blueviolet;
+    border-radius: 1rem;
+    h1 {
+      text-shadow: 1px 1px 2px rgb(36, 35, 35), 0 0 25px rgb(202, 199, 199),
+        0 0 5px yellow;
+    }
+    .form-container {
+      background-color: white;
+      display: flex;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      input {
+        border: none;
+      }
+      .text1 {
+        color: black;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+  .notes-container {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    .note {
+      background-color: blanchedalmond;
+      color: black;
+      padding: 0.3rem;
+      border-radius: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .icon {
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        input {
+          cursor: pointer;
+        }
+        .but {
+          border: 1px solid rgb(20, 18, 18);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .notes-container::-webkit-scrollbar {
+    display: none;
+  }
+}
